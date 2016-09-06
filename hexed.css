@@ -1,0 +1,59 @@
+.hexed-initialized {
+  position: relative;
+  /* ! */
+  perspective: 0px;
+  border: 1px solid black;
+}
+
+.hexed-choices {
+  display: none;
+}
+
+.hexed-main {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+
+  /* ! */
+  /*transform: translateY(25px) translateZ(-44px);*/
+
+  /* ! */
+  transform-origin: center 25px 0px;
+
+  /* ! */
+  transform-style: preserve-3d;
+}
+
+.hexed-main .hexed-side {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: inherit;
+
+  display: block;
+  position: absolute;
+
+  border: 1px solid black;
+  background: white;
+}
+
+/*
+.hexed-main .hexed-side0 {
+  transform: translateX(0px) translateY(-37px) translateZ(22px) rotateX(60deg);
+}
+.hexed-main .hexed-side1 {
+  transform: translateX(0px) translateY(0px) translateZ(44px) rotateX(0deg);
+}
+.hexed-main .hexed-side2 {
+  transform: translateX(0px) translateY(37px) translateZ(22px) rotateX(-60deg);
+}
+.hexed-main .hexed-side3 {
+  transform: translateX(0px) translateY(37px) translateZ(-22px) rotateX(-120deg);
+}
+.hexed-main .hexed-side4 {
+  transform: translateX(0px) translateY(0px) translateZ(-44px) rotateX(180deg);
+}
+.hexed-main .hexed-side5 {
+  transform: translateX(0px) translateY(-37px) translateZ(-22px) rotateX(120deg);
+}
+*/
