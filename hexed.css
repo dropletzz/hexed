@@ -1,7 +1,6 @@
 .hexed-initialized {
   position: relative;
   /* ! */
-  perspective: 1200px;
   border: 1px solid black;
 }
 
@@ -37,10 +36,11 @@
   background: white;
 
   -webkit-user-select: none;
-  -khtml-user-select: none;
   -moz-user-select: none;
   -o-user-select: none;
   user-select: none;
+  user-drag: none;
+  pointer-events: none;
 }
 
 /*
