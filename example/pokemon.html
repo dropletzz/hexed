@@ -1,0 +1,123 @@
+<html>
+  <head>
+    <title>hexed example</title>
+    <style>
+      body {
+        background-color: #31C191;
+        padding-top: 100px;
+        text-align: center;
+      }
+      .poke-dial {
+        display: inline-block;
+        height: 140px;
+        width: 70px;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      .poke {
+        display: table;
+        height: 100%;
+        width: 100%;
+      }
+      .poke div {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+      }
+      .poke div img {
+        width: 50px;
+        height: auto;
+      }
+
+      #poke-default .poke {
+        background-color: transparent;
+      }
+      .poke {
+        background-color: #ddd;
+      }
+    </style>
+    <link rel="stylesheet" type="text/css" href="../hexed.css">
+  </head>
+
+  <body>
+    <div id="poke-solid-nopersp" class="poke-dial">
+      <div class="poke"><div><img src="pokemon/mew.gif"></img></div></div>
+      <div class="poke"><div><img src="pokemon/porygon.gif"></img></div></div>
+      <div class="poke"><div><img src="pokemon/pikachu.gif"></img></div></div>
+      <div class="poke"><div><img src="pokemon/cosofantasma.gif"></img></div></div>
+      <div class="poke"><div><img src="pokemon/ponyta.gif"></img></div></div>
+    </div>
+
+    <div id="poke-solid-noborder" class="poke-dial">
+      <div class="poke"><div><img src="pokemon/mew.gif"></img></div></div>
+      <div class="poke"><div><img src="pokemon/porygon.gif"></img></div></div>
+      <div class="poke"><div><img src="pokemon/pikachu.gif"></img></div></div>
+      <div class="poke"><div><img src="pokemon/cosofantasma.gif"></img></div></div>
+      <div class="poke"><div><img src="pokemon/ponyta.gif"></img></div></div>
+    </div>
+
+    <div id="poke-default" class="poke-dial">
+      <div id="mew" class="poke"><div><img src="pokemon/mew.gif"></img></div></div>
+      <div id="porygon" class="poke"><div><img src="pokemon/porygon.gif"></img></div></div>
+      <div id="pikachu" class="poke"><div><img src="pokemon/pikachu.gif"></img></div></div>
+      <div id="gengar" class="poke"><div><img src="pokemon/cosofantasma.gif"></img></div></div>
+      <div id="ponyta" class="poke"><div><img src="pokemon/ponyta.gif"></img></div></div>
+    </div>
+
+    <div id="poke-solid" class="poke-dial">
+      <div class="poke"><div><img src="pokemon/mew.gif"></img></div></div>
+      <div class="poke"><div><img src="pokemon/porygon.gif"></img></div></div>
+      <div class="poke"><div><img src="pokemon/pikachu.gif"></img></div></div>
+      <div class="poke"><div><img src="pokemon/cosofantasma.gif"></img></div></div>
+      <div class="poke"><div><img src="pokemon/ponyta.gif"></img></div></div>
+    </div>
+
+    <div id="poke-solid-noborder-nopersp" class="poke-dial">
+      <div class="poke"><div><img src="pokemon/mew.gif"></img></div></div>
+      <div id="porygon" class="poke"><div><img src="pokemon/porygon.gif"></img></div></div>
+      <div class="poke"><div><img src="pokemon/pikachu.gif"></img></div></div>
+      <div class="poke"><div><img src="pokemon/cosofantasma.gif"></img></div></div>
+      <div class="poke"><div><img src="pokemon/ponyta.gif"></img></div></div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="../hexed.js"></script>
+    <script>
+      $('#poke-default').hexed();
+
+      $('#poke-solid').hexed({
+        borders: true,
+        bordersColor: '#000',
+        transparentify: false
+      });
+
+      $('#poke-solid-nopersp').hexed({
+        perspective: false,
+        borders: true,
+        bordersColor: '#000',
+        transparentify: false
+      });
+
+      $('#poke-solid-noborder').hexed({
+        borders: false,
+        transparentify: false
+      });
+
+      $('#poke-solid-noborder-nopersp').hexed({
+        perspective: false,
+        borders: false,
+        transparentify: true,
+        transitionTime: 1.0
+      });
+
+      $('.poke-dial').on('selected', function(event, choice, choiceId) {
+        console.log(choice + ' | ' + choiceId);
+      });
+    </script>
+
+  </body>
+
+</html>
+

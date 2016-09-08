@@ -10,21 +10,33 @@
 
         _.options = {
           perspective: true,
-          borders: false, //!
-          bordersColor: '#000', //!
+          borders: false,
+          bordersColor: '#000',
           transitionTime: 0.5,
-          opacify: false, //!
-          unchosenOpacity: 0.6,
+          transparentify: true,
+          transparentOpacity: 0.45,
           startChoice: 0
         };
 
         $.extend(_.options, settings);
 
+        if (_.options.borders) _.roundFun = function(n) { return n };
+        else                   _.roundFun = Math.floor;
+
         _.instanceId = instanceId++;
         _.$hexed = $(element);
+        _.$main = null;
         _.height = _.$hexed.height();
-        _.rotation = 0;
+
+        _.choices = null;
+        _.choicesNum = 0;
         _.currentChoice = _.options.startChoice;
+
+        _.$sides = null;
+        _.currentSide = null;
+        _.previousSide = null;
+        _.rotation = 0;
+        _.mainTransform = '';
 
         _.swiping = false;
         _.clickThreshold = 5;
@@ -47,12 +59,11 @@
 
         _.choices = _.$hexed.children();
         _.choices.wrapAll($('<div class="hexed-choices">'));
-        _.choices = _.choices.toArray();
         _.choicesNum = _.choices.length;
 
         _.createHexagon();
         _.$main = _.$hexed.children('.hexed-main');
-        _.sides = _.$main.children('.hexed-side').toArray();
+        _.sides = _.$main.children('.hexed-side');
         _.currentSide = 1;
 
         for (var i=0; i<=3; i++) {
@@ -61,8 +72,7 @@
         _.setSide(3, _.currentChoice+2);
         _.setSide(5, _.currentChoice-2);
 
-        //_.$main.children('.hexed-side1').html(_.$choices[0].outerHTML);
-        //_.$sides[1].innerHTML = _.$choices[0].outerHTML;
+        _.sidesStyle(true);
 
         _.events();
       }
@@ -73,10 +83,11 @@
       var _ = this,
           main = $('<div class="hexed-main">').appendTo(_.$hexed),
           height = _.$hexed.height(),
-          w =  height / 2.0,
-          w2 = w / 2.0,
-          yd = 0.75 * w,
-          zd = 0.433013 * w,
+          w =  _.roundFun(height / 2.0),
+          w2 = _.roundFun(w / 2.0),
+          xd = 0,
+          yd = _.roundFun(0.75 * w),
+          zd = _.roundFun(0.433013 * w),
           zdPlus = 0,
           persp = 0;
 
@@ -84,11 +95,12 @@
         persp = height*5;
         zdPlus = height/5*1.2;
       }
+      if (_.options.borders) xd = 1;
       _.$hexed.css({ 'perspective': persp+'px' });
-      _.mainTransform = 'translateX(-1px) translateY('+w2+'px) translateZ('+(-zd-zdPlus)+'px)';
+      _.mainTransform = 'translateX('+(-xd)+'px) translateY('+(w2-xd)+'px) translateZ('+(-zd-zdPlus)+'px)';
       main.css({
         'transform': _.mainTransform,
-        'transform-origin': 'center '+w2+'px 0px'
+        'transform-origin': 'center '+(w/2.0 + xd)+'px 0px'
       });
       setTimeout( function() {
         main.css({
@@ -110,6 +122,30 @@
       var _ = this;
 
       _.sides[mod(sideIndex, 6)].innerHTML = _.choices[mod(choiceIndex, _.choicesNum)].outerHTML;
+    }
+
+
+    Hexed.prototype.sidesStyle = function() {
+
+      var _ = this,
+          first = arguments[0];
+
+      if (first) {
+        if (_.options.transparentify) {
+          _.sides.cssPrefix({ transition: 'opacity ' + _.options.transitionTime + 's' });
+          _.sides.css({ opacity: _.options.transparentOpacity, });
+          $(_.sides[_.currentSide]).css({ opacity: 1.0 });
+        }
+        if (_.options.borders) {
+          _.sides.css({ border: '1px solid ' + _.options.bordersColor });
+        }
+      }
+      else {
+        if (_.options.transparentify) {
+          $(_.sides[_.previousSide]).css({ opacity: _.options.transparentOpacity });
+          $(_.sides[_.currentSide]).css({ opacity: 1.0 });
+        }
+      }
     }
 
 
@@ -168,6 +204,7 @@
       var _ = this;
 
       _.rotation--;
+      _.previousSide = _.currentSide;
       _.currentSide = mod(_.currentSide-1, 6);
       _.currentChoice = mod(_.currentChoice-1, _.choicesNum);
       _.setSide(_.currentSide-2, _.currentChoice-2);
@@ -175,6 +212,11 @@
       _.$main.css({
         'transform': _.mainTransform + ' rotateX('+(60*_.rotation)+'deg)'
       });
+
+
+      _.sidesStyle();
+
+      _.$hexed.trigger('selected', [ _.currentChoice, _.choices[_.currentChoice].id ]);
     }
 
 
@@ -183,6 +225,7 @@
       var _ = this;
 
       _.rotation++;
+      _.previousSide = _.currentSide;
       _.currentSide = mod(_.currentSide+1, 6);
       _.currentChoice = mod(_.currentChoice+1, _.choicesNum);
       _.setSide(_.currentSide+2, _.currentChoice+2);
@@ -190,6 +233,17 @@
       _.$main.css({
         'transform': _.mainTransform + ' rotateX('+(60*_.rotation)+'deg)'
       });
+
+      _.sidesStyle();
+
+      /*
+      if (_.options.transparentify) {
+        $(_.sides[mod(_.currentSide-1, 6)]).css({ opacity: _.options.transparentOpacity });
+        $(_.sides[_.currentSide]).css({ opacity: 1.0 });
+      }
+      */
+
+      _.$hexed.trigger('selected', [ _.currentChoice, _.choices[_.currentChoice].id ]);
     }
 
 
@@ -205,6 +259,21 @@
       return (((x%n)+n) % n);
     }
 
+    $.fn.cssPrefix = function(obj) {
+      var _ = this, style;
+
+      for (var prop in obj)
+        if (obj.hasOwnProperty(prop)) {
+          style = {};
+          style['-webkit-'+prop] = obj[prop];
+          style['-moz-'+prop] = obj[prop];
+          style['-o-'+prop] =  obj[prop];
+          style[prop] = obj[prop];
+          _.css(style);
+        }
+
+      return _;
+    }
 
     $.fn.hexed = function() {
       var _ = this,

@@ -1,7 +1,6 @@
 .hexed-initialized {
   position: relative;
   /* ! */
-  border: 1px solid black;
 }
 
 .hexed-choices {
@@ -32,8 +31,10 @@
   display: block;
   position: absolute;
 
-  border: 1px solid black;
-  background: white;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
 
   -webkit-user-select: none;
   -moz-user-select: none;
