@@ -1,6 +1,5 @@
 .hexed-initialized {
   position: relative;
-  /* ! */
 }
 
 .hexed-choices {
@@ -12,13 +11,14 @@
   height: 100%;
   position: absolute;
 
-  /* ! */
-  /*transform: translateY(25px) translateZ(-44px);*/
-
-  /* ! */
+  -webkit-transform-origin: center 25px 0px;
+  -moz-transform-origin: center 25px 0px;
+  -o-transform-origin: center 25px 0px;
   transform-origin: center 25px 0px;
 
-  /* ! */
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
   transform-style: preserve-3d;
 }
 
@@ -37,11 +37,12 @@
   backface-visibility: hidden;
 }
 
-.hexed-no-pointer-events {
+.hexed-no-interaction {
   -webkit-user-select: none;
   -moz-user-select: none;
   -o-user-select: none;
   user-select: none;
+
   user-drag: none;
   pointer-events: none;
 }

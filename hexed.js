@@ -104,15 +104,15 @@
       zdPlus = height/5*1.2;
     }
     if (_.options.borders) xd = 1;
-    _.$hexed.css({ 'perspective': persp+'px' });
+    _.$hexed.cssPrefix({ perspective: persp+'px' });
     _.mainTransform = 'translateX('+(-xd)+'px) translateY('+(w2-xd)+'px) translateZ('+(-zd-zdPlus)+'px)';
-    main.css({
+    main.cssPrefix({
       'transform': _.mainTransform,
       'transform-origin': 'center '+(w/2.0 + xd)+'px 0px'
     });
     setTimeout( function() {
-      main.css({
-        'transition': 'transform '+_.options.transitionTime+'s'
+      main.cssPrefix({
+        transition: 'transform '+_.options.transitionTime+'s'
       });
     }, 60);
 
@@ -157,9 +157,9 @@
       if (_.options.borders)
         _.sides.css({ border: '1px solid ' + _.options.bordersColor });
 
-      _.sides.addClass('hexed-no-pointer-events');
+      _.sides.addClass('hexed-no-interaction');
       if (_.options.currentChoiceModifiable)
-        $(_.sides[_.currentSide]).removeClass('hexed-no-pointer-events');
+        $(_.sides[_.currentSide]).removeClass('hexed-no-interaction');
     }
     else {
       if (_.options.transparentify) {
@@ -167,8 +167,8 @@
         $(_.sides[_.currentSide]).css({ opacity: 1.0 });
       }
       if (_.options.currentChoiceModifiable) {
-        $(_.sides[_.previousSide]).addClass('hexed-no-pointer-events');
-        $(_.sides[_.currentSide]).removeClass('hexed-no-pointer-events');
+        $(_.sides[_.previousSide]).addClass('hexed-no-interaction');
+        $(_.sides[_.currentSide]).removeClass('hexed-no-interaction');
       }
     }
   }
@@ -257,7 +257,7 @@
 
     _.sidesStyle();
 
-    _.$main.css({
+    _.$main.cssPrefix({
       'transform': _.mainTransform + ' rotateX('+(60*_.rotation)+'deg)'
     });
 
