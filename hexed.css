@@ -35,7 +35,9 @@
   -moz-backface-visibility: hidden;
   -o-backface-visibility: hidden;
   backface-visibility: hidden;
+}
 
+.hexed-no-pointer-events {
   -webkit-user-select: none;
   -moz-user-select: none;
   -o-user-select: none;
@@ -43,24 +45,3 @@
   user-drag: none;
   pointer-events: none;
 }
-
-/*
-.hexed-main .hexed-side0 {
-  transform: translateX(0px) translateY(-37px) translateZ(22px) rotateX(60deg);
-}
-.hexed-main .hexed-side1 {
-  transform: translateX(0px) translateY(0px) translateZ(44px) rotateX(0deg);
-}
-.hexed-main .hexed-side2 {
-  transform: translateX(0px) translateY(37px) translateZ(22px) rotateX(-60deg);
-}
-.hexed-main .hexed-side3 {
-  transform: translateX(0px) translateY(37px) translateZ(-22px) rotateX(-120deg);
-}
-.hexed-main .hexed-side4 {
-  transform: translateX(0px) translateY(0px) translateZ(-44px) rotateX(180deg);
-}
-.hexed-main .hexed-side5 {
-  transform: translateX(0px) translateY(-37px) translateZ(-22px) rotateX(120deg);
-}
-*/
