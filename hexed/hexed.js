@@ -19,7 +19,8 @@
         transparentOpacity: 0.45,
         startChoice: 0,
         currentChoiceModifiable: false,
-        lazyUpdate: false
+        lazyUpdate: false,
+        formInput: false
       };
 
       $.extend(_.options, settings);
@@ -36,6 +37,7 @@
       _.choices = null;
       _.choicesNum = 0;
       _.currentChoice = _.options.startChoice;
+      _.$input = null;
 
       _.$sides = null;
       _.currentSide = null;
@@ -65,10 +67,16 @@
       _.$hexed.addClass('hexed-initialized');
 
       _.choices = _.$hexed.children();
-      _.choices.wrapAll($('<div class="hexed-choices">'));
+      _.choices.wrapAll($('<div class="hexed-choices">').hide());
       _.choicesContainer = $(_.choices[0]).parent();
       _.choicesNum = _.choices.length;
       if (_.choicesNum < 5) _.options.lazyUpdate = true;
+
+      if (_.options.formInput) {
+        _.$input = $('<input class="hexed-input">').hide().appendTo(_.$hexed);
+        _.$input.attr('name', _.$hexed.data('name'));
+        _.setInputValue();
+      }
 
       _.createHexagon();
       _.$main = _.$hexed.children('.hexed-main');
@@ -131,7 +139,6 @@
     $('<div class="hexed-side">').appendTo(main).css(sideCSS(w, -yd,   -zd,  120));
   }
 
-
   function sideCSS(h, ty, tz, rx) {
     return {
       'height': h+'px',
@@ -139,6 +146,16 @@
     };
   }
 
+  Hexed.prototype.setInputValue = function() {
+
+    var _ = this;
+
+    _.$input.val(_.getValue(_.currentChoice));
+  }
+
+  Hexed.prototype.getValue = function(index) {
+    return $(this.choices[index]).data('value');
+  }
 
 
   Hexed.prototype.setSide = function (sideIndex, choiceIndex) {
@@ -259,7 +276,14 @@
     if (! _.options.lazyUpdate)
       _.setSide(_.currentSide + rotation*2, _.currentChoice + rotation*2);
 
+    if (_.options.formInput) _.setInputValue();
+
     _.updateHexagon();
+
+    _.$hexed.trigger('selected', {
+      index: _.currentChoice,
+      value: _.getValue(_.currentChoice)
+    });
   }
 
 
@@ -272,8 +296,6 @@
     _.$main.cssPrefix({
       'transform': _.mainTransform + ' rotateX('+(60*_.rotation)+'deg)'
     });
-
-    _.$hexed.trigger('selected', [ _.currentChoice, _.choices[_.currentChoice].id ]);
   }
 
 
