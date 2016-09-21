@@ -1,0 +1,85 @@
+<html>
+  <head>
+    <title>hexed example</title>
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <link rel="stylesheet" type="text/css" href="../hexed.css">
+  </head>
+
+  <body>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    <div class="poke-container">
+      <div id="poke-solid-nopersp" class="poke-dial">
+        <div class="poke"><div><img src="pokemon/mew.gif"></img></div></div>
+        <div class="poke"><div><img src="pokemon/porygon.gif"></img></div></div>
+        <div class="poke"><div><img src="pokemon/pikachu.gif"></img></div></div>
+        <div class="poke"><div><img src="pokemon/cosofantasma.gif"></img></div></div>
+        <div class="poke"><div><img src="pokemon/ponyta.gif"></img></div></div>
+      </div>
+
+      <div id="poke-solid-noborder" class="poke-dial">
+        <div class="poke"><div><img src="pokemon/mew.gif"></img></div></div>
+        <div class="poke"><div><img src="pokemon/porygon.gif"></img></div></div>
+        <div class="poke"><div><img src="pokemon/pikachu.gif"></img></div></div>
+        <div class="poke"><div><img src="pokemon/cosofantasma.gif"></img></div></div>
+        <div class="poke"><div><img src="pokemon/ponyta.gif"></img></div></div>
+      </div>
+
+      <div id="poke-default" class="poke-dial">
+        <div id="mew" class="poke"><div><img src="pokemon/mew.gif"></img></div></div>
+        <div id="porygon" class="poke"><div><img src="pokemon/porygon.gif"></img></div></div>
+        <div id="pikachu" class="poke"><div><img src="pokemon/pikachu.gif"></img></div></div>
+        <div id="gengar" class="poke"><div><img src="pokemon/cosofantasma.gif"></img></div></div>
+        <div id="ponyta" class="poke"><div><img src="pokemon/ponyta.gif"></img></div></div>
+      </div>
+
+      <div id="poke-solid" class="poke-dial">
+        <div class="poke"><div><img src="pokemon/mew.gif"></img></div></div>
+        <div class="poke"><div><img src="pokemon/porygon.gif"></img></div></div>
+        <div class="poke"><div><img src="pokemon/pikachu.gif"></img></div></div>
+        <div class="poke"><div><img src="pokemon/cosofantasma.gif"></img></div></div>
+        <div class="poke"><div><img src="pokemon/ponyta.gif"></img></div></div>
+      </div>
+
+      <div id="poke-solid-noborder-nopersp" class="poke-dial">
+        <div class="poke"><div><img src="pokemon/mew.gif"></img></div></div>
+        <div class="poke"><div><img src="pokemon/porygon.gif"></img></div></div>
+        <div class="poke"><div><img src="pokemon/pikachu.gif"></img></div></div>
+        <div class="poke"><div><img src="pokemon/cosofantasma.gif"></img></div></div>
+        <div class="poke"><div><img src="pokemon/ponyta.gif"></img></div></div>
+      </div>
+    </div>
+
+    </br></br>
+
+    <div class="input-dial-container">
+      <div class="input-dial">
+        <div class="input-dial-elem input-dial-red"><input type="text" placeholder="write some shizz"></div>
+        <div class="input-dial-elem input-dial-yellow"><input type="text" placeholder="write some other shizz"></div>
+        <div class="input-dial-elem input-dial-green"><input type="text" placeholder="write some more"></div>
+      </div>
+    </div>
+
+    <div class="numbers-dial-container">
+      <div class="numbers-dial">
+      </div>
+    </div>
+    <script type="text/javascript">
+      var dial = $('.numbers-dial'),
+          cont = $('.numbers-dial-container');
+
+      for (var i=0; i<=9; i++)
+        $('<div>').addClass('numbers-dial-elem').html(''+i).appendTo(dial);
+
+      dial.clone().appendTo(cont);
+      dial.clone().appendTo(cont);
+      dial.clone().appendTo(cont);
+      dial.remove();
+    </script>
+
+    <script type="text/javascript" src="../hexed.js"></script>
+    <script type="text/javascript" src="javascripts/main.js"></script>
+
+  </body>
+
+</html>

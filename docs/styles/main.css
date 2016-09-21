@@ -1,0 +1,84 @@
+body {
+  background-color: #31C191;
+  text-align: center;
+}
+.poke-container {
+  width: 100%;
+  margin-top: 100px;
+  padding: 0px;
+}
+.poke-dial {
+  display: inline-block;
+  height: 140px;
+  width: 70px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.poke {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+.poke div {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+.poke div img {
+  width: 50px;
+  height: auto;
+}
+
+#poke-default .poke {
+  background-color: transparent;
+}
+.poke {
+  background-color: #ddd;
+}
+
+.input-dial {
+  display: inline-block;
+  height: 150px;
+  width: 50%;
+}
+.input-dial-elem {
+  height: 75px;
+  width: 100%;
+}
+.input-dial-elem input {
+  height: 100%;
+  width: 100%;
+  font-size: 20px;
+  border: none;
+  text-align: center;
+}
+.input-dial-red input {
+  background-color: #ED2831;
+  color: #FFF;
+}
+.input-dial-yellow input {
+  background-color: #FFD600;
+  color: #000;
+}
+.input-dial-green input {
+  background-color: #209831;
+  color: #FFF;
+}
+
+.numbers-dial-container {
+  margin: 0px;
+  padding: 0px;
+}
+.numbers-dial {
+  display: inline-block;
+  height: 100px;
+  width: 50px;
+}
+.numbers-dial-elem {
+  height: 100%;
+  line-height: 50px;
+  color: #FFF;
+  background-color: #000;
+  font-size: 30px;
+}

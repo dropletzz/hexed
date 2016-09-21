@@ -212,7 +212,7 @@
           dist = Math.sqrt(Math.pow(distX,2) + Math.pow(distY,2));
 
       if (dist <= _.clickThreshold && !touches) {
-        var y = _.startY - _.$hexed.offsetFix().top;
+        var y = _.startY - _.$hexed.fixedOffset().top;
 
         if      (y < _.height * 0.25) _.rotate('down')
         else if (y > _.height * 0.75) _.rotate('up');
@@ -281,7 +281,7 @@
     return (((x%n)+n) % n);
   }
 
-  $.fn.offsetFix = function() {
+  $.fn.fixedOffset = function() {
     var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
 
     if (isChrome)
